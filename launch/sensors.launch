@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<launch>
+
+    <!-- ===================================================== -->
+    <!-- Sensor Bringup -->
+    <!-- ===================================================== -->
+
+    <!--
+        Replace with your own sensor launch.
+
+        Examples:
+            RGB Camera
+            RGB-D Camera
+            Realsense
+            Azure Kinect
+            LiDAR
+    -->
+
+    <include file="$(find your_sensor_package)/launch/camera.launch"/>
+
+</launch>

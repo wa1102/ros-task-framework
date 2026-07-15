@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# ROS
+build/
+devel/
+logs/
+
+# VSCode
+.vscode/
+
+# Linux
+*.swp
+*.swo
+
+# macOS
+.DS_Store
+
+# Log
+*.log
+
+# Catkin
+catkin_ws/build/
+catkin_ws/devel/

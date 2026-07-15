@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<launch>
+
+    <!-- ===================================================== -->
+    <!-- Robot Bringup (Replace with your own robot driver) -->
+    <!-- ===================================================== -->
+
+    <arg name="robot_ip" default="192.168.1.100"/>
+
+    <!--
+        Replace the following include with your own robot launch.
+        Example:
+            UR Robot
+            xArm
+            Franka
+            RM Robot
+            Any MoveIt compatible robot
+    -->
+
+    <include file="$(find your_robot_bringup)/launch/robot.launch"/>
+
+    <!-- Robot State Publisher -->
+    <node
+        pkg="robot_state_publisher"
+        type="robot_state_publisher"
+        name="robot_state_publisher"/>
+
+</launch>
