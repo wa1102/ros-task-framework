@@ -10,11 +10,11 @@ The framework is designed as a middleware layer between external scheduling plat
 
 ## Video
 
-https://github.com/wa1102/ros-task-framework/issues/1
+https://github.com/user-attachments/assets/cbcd96b4-65ba-42c5-8879-c40e1ec7eb1b
 
 Robot Task Example
 
-https://github.com/wa1102/ros-task-framework/issues/2
+https://github.com/user-attachments/assets/cb21d1e8-a45b-4ec5-8a98-5fe73b3a9360
 
 The full implementation of ROS Task Framework
 
