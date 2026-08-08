@@ -12,7 +12,7 @@ The framework is designed as a middleware layer between external scheduling plat
 
 https://github.com/user-attachments/assets/cbcd96b4-65ba-42c5-8879-c40e1ec7eb1b
 
-Robot Task Example
+A Robot Task Example
 
 https://github.com/user-attachments/assets/cb21d1e8-a45b-4ec5-8a98-5fe73b3a9360
 
