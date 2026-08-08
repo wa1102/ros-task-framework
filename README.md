@@ -11,7 +11,6 @@ The framework integrates FastAPI, Shell scripting, ROS Launch, and Python task e
 ## ✨ Features
 
 - 🚀 HTTP-based robot task scheduling using FastAPI
-- ⚙️ Dynamic task registration through YAML configuration
 - 🤖 Automatic ROS Launch startup and shutdown
 - 📋 Unified task lifecycle management
 - 📄 Real-time task status and log monitoring
@@ -154,7 +153,7 @@ The scheduler is responsible for managing the complete task lifecycle, including
 ## 1. Clone the repository
 
 ```bash
-git clone https://github.com/yourname/ros-task-framework.git
+git clone https://github.com/wa1102/ros-task-framework.git
 ```
 
 ## 2. Install dependencies
@@ -176,7 +175,7 @@ source devel/setup.bash
 ## 4. Start the Task Server
 
 ```bash
-python server/ros_server.py
+python ros_server.py
 ```
 
 The server will start listening on:
@@ -193,13 +192,13 @@ Robot tasks are registered through a YAML configuration file rather than hardcod
 Example:
 
 ```yaml
-button:
+task_a:
   script: scripts/task_a.sh
 
-rotate:
+task_b:
   script: scripts/task_b.sh
 
-combo:
+task_c:
   script: scripts/task_c.sh
 ```
 
@@ -221,7 +220,7 @@ Request
 
 ```json
 {
-    "task_type": "button",
+    "task_type": "task_a",
     "task_id": "001"
 }
 ```
