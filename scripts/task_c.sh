@@ -1,39 +1,21 @@
 #!/bin/bash
+# ============================================================================
+# task_c.sh — Task C: bringup + task.launch (dual camera + TF frames) + demo_task(task_c)
+# ============================================================================
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "${SCRIPT_DIR}/common.sh"
 
 echo "================================================="
 echo "[INFO] Starting Task C"
 echo "================================================="
 
-source /opt/ros/noetic/setup.bash
-source devel/setup.bash
-
-echo "[INFO] Launching robot..."
-roslaunch robot_task_demo bringup.launch &
-PID_LAUNCH1=$!
-
-sleep 3
-
-echo "[INFO] Launching dual camera..."
-roslaunch robot_task_demo task.launch &
-PID_LAUNCH2=$!
-
-echo "[INFO] Waiting for initialization..."
-sleep 3
-
-echo "[INFO] Running Task C..."
-python3 catkin_ws/src/robot_demo/scripts/demo_task.py --task task_c
-PY_RET=$?
+source_ros_env
+launch_ros_core "task.launch"
+run_python_task "task_c" "${1:-}"
+RET=$?
+cleanup
 
 echo "[INFO] Task C finished."
-
-echo "[INFO] Cleaning up..."
-
-kill -SIGINT $PID_LAUNCH1 2>/dev/null
-kill -SIGINT $PID_LAUNCH2 2>/dev/null
-
-wait $PID_LAUNCH1 2>/dev/null
-wait $PID_LAUNCH2 2>/dev/null
-
-echo "[INFO] Task Finished."
-
-exit $PY_RET
+exit ${RET}

@@ -1,10 +1,10 @@
 tasks:
 
   task_a:
-    script: ros-task-framework/scripts/task_a.sh
+    script: scripts/task_a.sh
 
   task_b:
-    script: ros-task-framework/scripts/task_b.sh
+    script: scripts/task_b.sh
 
   task_c:
-    script: ros-task-framework/scripts/task_c.sh
+    script: scripts/task_c.sh

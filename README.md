@@ -20,6 +20,7 @@ The full implementation of ROS Task Framework
 
 ## Project Structure
 
+```
                 HTTP Request
                       │
                       ▼
@@ -41,12 +42,11 @@ The full implementation of ROS Task Framework
                       │
                       ▼
              Cleanup & Logging
-
+```
 
 Each task is executed through the same scheduling process, providing a consistent and extensible execution framework.
 
 ---
-
 
 ## Quick Start
 
@@ -77,7 +77,7 @@ source devel/setup.bash
 Start the task server:
 
 ```bash
-python ros_server.py
+python server/ros_server.py
 ```
 
 The server will start at:
@@ -111,7 +111,9 @@ Response:
 {
     "status": "executing",
     "task_id": "001",
-    "message": "Task started"
+    "message": "Started task_a",
+    "pid": 12345,
+    "log_path": "logs/task_a_001_20250101_120000.log"
 }
 ```
 
@@ -129,7 +131,11 @@ Example response:
 {
     "task_id": "001",
     "status": "executing",
-    "log_path": "logs/task_001.log"
+    "type": "task_a",
+    "pid": 12345,
+    "log_path": "logs/task_a_001_20250101_120000.log",
+    "returncode": null,
+    "log_tail": ["[INFO] Executing step 1/5", "..."]
 }
 ```
 
@@ -145,7 +151,9 @@ Example response:
 
 ```json
 {
-    "global_status": "idle"
+    "global_status": "idle",
+    "active_task_id": null,
+    "message": "System is idle."
 }
 ```
 
@@ -162,7 +170,9 @@ config/tasks.yaml
 Example:
 
 ```yaml
-pick_object:
+tasks:
+
+  pick_object:
     script: scripts/pick_object.sh
 ```
 
@@ -176,43 +186,55 @@ Example:
 
 ```bash
 #!/bin/bash
+set -euo pipefail
 
-source ~/catkin_ws/devel/setup.bash
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "${SCRIPT_DIR}/common.sh"
 
+echo "[INFO] Starting Pick Object Task"
+
+source_ros_env
+launch_ros_core "sensors.launch"
+python3 catkin_ws/src/robot_demo/scripts/demo_task.py --task pick_object "${1:-}"
+RET=$?
+cleanup
+
+echo "[INFO] Pick Object Task finished."
+exit ${RET}
 ```
 
 Then send an HTTP request to start the task:
 
 ```bash
 curl -X POST \
-http://localhost:8080/start_task \
--H "Content-Type: application/json" \
--d '{
-    "task_type":"pick_object",
-    "task_id":"001"
-}'
+  http://localhost:8080/start_task \
+  -H "Content-Type: application/json" \
+  -d '{
+    "task_type": "pick_object",
+    "task_id": "001"
+  }'
 ```
 
 The framework will automatically execute the task workflow:
 
 ```
 HTTP Request
-      |
-      v
+      │
+      ▼
 FastAPI Server
-      |
-      v
+      │
+      ▼
 Task Dispatcher
-      |
-      v
+      │
+      ▼
 Shell Script
-      |
-      v
+      │
+      ▼
 ROS Launch
-      |
-      v
+      │
+      ▼
 Python Robot Task
-      |
-      v
+      │
+      ▼
 Logging and Resource Cleanup
 ```
