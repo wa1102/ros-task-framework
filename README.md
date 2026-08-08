@@ -10,10 +10,6 @@ The framework is designed as a middleware layer between external scheduling plat
 
 ## Project Structure
 
-```
-The framework follows a layered task execution pipeline.
-
-```text
                 HTTP Request
                       │
                       ▼
@@ -71,7 +67,7 @@ source devel/setup.bash
 Start the task server:
 
 ```bash
-python server/ros_server.py
+python ros_server.py
 ```
 
 The server will start at:
@@ -173,7 +169,6 @@ Example:
 
 source ~/catkin_ws/devel/setup.bash
 
-roslaunch robot_demo task.launch
 ```
 
 Then send an HTTP request to start the task:
