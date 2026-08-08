@@ -8,6 +8,16 @@ The framework manages the complete execution pipeline from HTTP task requests to
 
 The framework is designed as a middleware layer between external scheduling platforms and ROS robots, providing a simple and extensible solution for industrial robot task integration.
 
+## Video
+
+https://github.com/wa1102/ros-task-framework/issues/1
+
+Robot Task Example
+
+https://github.com/wa1102/ros-task-framework/issues/2
+
+The full implementation of ROS Task Framework
+
 ## Project Structure
 
                 HTTP Request
@@ -31,7 +41,7 @@ The framework is designed as a middleware layer between external scheduling plat
                       │
                       ▼
              Cleanup & Logging
-```
+
 
 Each task is executed through the same scheduling process, providing a consistent and extensible execution framework.
 
